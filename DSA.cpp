@@ -1,47 +1,52 @@
 #include <iterator>
 #include <iostream>
+#include <string>
 
 using namespace std;
+
 
 template <typename T>
 class SampleList
 {
+  class Node {
+  public:
+    Node(Node* next = NULL, T data = T{});
+  private:
+    Node* next;
+    int data;
+  };
   protected:
     void insertAtEnd(T newValue);
     void insertAtStart(T newValue);
     T removeFromStart();
+    Node *head;
+    Node *tail;
   private:
-    class node
-    {
-      T data;
-      node *prev;
-      node *next;
-    }
-    node *head, *tail;
-    String name;
+    string name;
   public:
-  SimpleList()
-  {
-    prev = NULL;
-    tail = NULL;
-  }
-  virtual T pop() = 0;
-  virtual void push(T newValue) = 0;
-  String getName()
-    return name};
+    SimpleList()
+    {
+      prev = NULL;
+      tail = NULL;
+    }
+    virtual T pop() = 0;
+    virtual void push(T newValue) = 0;
+    string getName(){
+      return name;}
 };
 
 template <typename T>
   void insertAtStart(T newValue)
   {
-    node *temp = new node;
+    Node *temp = new Node;
     temp->data = newValue;
     temp->next = head;
     head = temp;
   }
+template <typename T>
   void insertAtEnd(T newValue)
   {
-    node *temp = new node;
+    Node *temp = new Node;
     temp->data = newValue;
     temp->next = NULL;
     if(head == NULL)
@@ -58,12 +63,13 @@ template <typename T>
   }
   T removeFromStart()
   {
-    node *temp = new node;
+    Node *temp = new Node;
     temp = head;
     head = head->next;
     return temp->data
     delete temp;
   }
+
 template <typename T>
 class Stack : public SimpleList
 {
