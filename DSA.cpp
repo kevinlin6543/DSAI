@@ -1,36 +1,28 @@
 #include <iterator>
 #include <iostream>
 #include <string>
-
-template <typename T>
-class Node {
-public:
-  Node(Node* next = NULL, T data = T{});
-private:
-  Node* next;
-  int data;
-};
+#include <fstream>
 
 using namespace std;
 
-
 template <typename T>
-class SampleList
+class SimpleList
 {
   protected:
     void insertAtEnd(T newValue);
     void insertAtStart(T newValue);
     T removeFromStart();
+  private:
+    class Node {
+    public:
+      Node* next;
+      T data;
+    };
     Node* head;
     Node* tail;
-  private:
     string name;
   public:
-    SimpleList()
-    {
-      head = NULL;
-      tail = NULL;
-    }
+    SimpleList();
     virtual T pop() = 0;
     virtual void push(T newValue) = 0;
     string getName(){
@@ -38,7 +30,7 @@ class SampleList
 };
 
 template <typename T>
-  void insertAtStart(T newValue)
+void SimpleList<T>::insertAtStart(T newValue)
   {
     Node *temp = new Node;
     temp->data = newValue;
@@ -46,9 +38,9 @@ template <typename T>
     head = temp;
   }
 template <typename T>
-  void insertAtEnd(T newValue)
+void SimpleList<T>::insertAtEnd(T newValue)
   {
-    Node *temp = new Node;
+    Node* temp = new Node();
     temp->data = newValue;
     temp->next = NULL;
     if(head == NULL)
@@ -63,30 +55,60 @@ template <typename T>
       tail = temp;
     }
   }
-  T removeFromStart()
+template <typename T>
+T SimpleList<T>::removeFromStart()
   {
-    Node *temp = new Node;
+    Node* temp = new Node;
     temp = head;
     head = head->next;
-    return temp->data
+    return temp->data;
     delete temp;
   }
 
 template <typename T>
-class Stack : public SimpleList
+class Stack : public SimpleList<T>
 {
   public:
-    T Stack::pop(){
-      this->};
+    Stack()
+    {
+      SimpleList<T>();
+    }
+    T pop(){
+      this->removeFromStart();}
     void push(T newValue);
-}
+};
 
 template <typename T>
-class Queue : public SimpleList
+class Queue : public SimpleList<T>
 {
   public:
-    T Queue::pop(){
-      this->insertAtEnd()};
-    void Queue::push(T newValue){
-      this->removeFromStart()};
+    Queue() {
+      head = NULL;
+      tail = NULL;
+    }
+    T pop(){
+      this->removeFromStart();}
+    void push(T newValue) {
+      this->insertAtEnd(newValue);
+    }
+};
+
+
+
+int main() {
+  Queue<int> test;
+  test.push(15);
+  //test.push(1);
+  //cout<<test.pop();
+  cout<<"Hello programming!\n";
+  //ofstream tester;
+  //tester.open("ex.txt");
+  //tester <<test.pop();
+  //tester << "Hello programming!\n";
+  //tester.close();
+
+  //char *token = std::strtok(input, "\n");
+   //while (token != NULL) {
+     //char *command =
+  return 0;
 }
