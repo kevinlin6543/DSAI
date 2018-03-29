@@ -64,3 +64,21 @@ template <typename T>
     return temp->data
     delete temp;
   }
+template <typename T>
+class Stack : public SimpleList
+{
+  public:
+    T Stack::pop(){
+      this->};
+    void push(T newValue);
+}
+
+template <typename T>
+class Queue : public SimpleList
+{
+  public:
+    T Queue::pop(){
+      this->insertAtEnd()};
+    void Queue::push(T newValue){
+      this->removeFromStart()};
+}
