@@ -2,31 +2,33 @@
 #include <iostream>
 #include <string>
 
+template <typename T>
+class Node {
+public:
+  Node(Node* next = NULL, T data = T{});
+private:
+  Node* next;
+  int data;
+};
+
 using namespace std;
 
 
 template <typename T>
 class SampleList
 {
-  class Node {
-  public:
-    Node(Node* next = NULL, T data = T{});
-  private:
-    Node* next;
-    int data;
-  };
   protected:
     void insertAtEnd(T newValue);
     void insertAtStart(T newValue);
     T removeFromStart();
-    Node *head;
-    Node *tail;
+    Node* head;
+    Node* tail;
   private:
     string name;
   public:
     SimpleList()
     {
-      prev = NULL;
+      head = NULL;
       tail = NULL;
     }
     virtual T pop() = 0;
